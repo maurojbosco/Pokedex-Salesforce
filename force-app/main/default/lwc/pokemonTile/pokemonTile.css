@@ -1,12 +1,9 @@
 :host {
-	--sds-c-card-color-background:  rgb(255, 255, 255);
+	--sds-c-card-color-background:  rgba(255, 51, 0, 0.918);
 }
 .pokemon-tile {
 	display: block;
-	border: 1px solid #471a1a;
+	border: 1px solid #000000;
 	border-radius: .25rem;
-	background-color: rgb(126, 119, 119);
-}
-.pokemon-silhouette {
-	height: 100px;
+	background-color: rgb(0, 0, 0);
 }

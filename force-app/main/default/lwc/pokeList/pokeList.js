@@ -1,5 +1,3 @@
-import { publish, MessageContext } from 'lightning/messageService';
-//import BEAR_LIST_UPDATE_MESSAGE from '@salesforce/messageChannel/BearListUpdate__c';
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, wire } from 'lwc';
 /** PokemonController.searchPokemons(searchTerm) Apex method */
@@ -7,7 +5,6 @@ import searchPokemons from '@salesforce/apex/PokemonController.searchPokemons';
 export default class PokeList extends NavigationMixin(LightningElement) {
 	searchTerm = '';
 	pokemons;
-    @wire(MessageContext) messageContext;
     @wire(searchPokemons, {searchTerm: '$searchTerm'})
     loadPokemons(result) {
     this.pokemons = result;
@@ -15,7 +12,6 @@ export default class PokeList extends NavigationMixin(LightningElement) {
         const message = {
         pokemons: result.data
     };
-    publish(this.messageContext, POKE_LIST_UPDATE_MESSAGE, message);
   }
 }
 	handleSearchTermChange(event) {

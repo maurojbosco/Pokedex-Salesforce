@@ -8,20 +8,20 @@
 					variant="label-hidden"
 					class="slds-var-m-bottom_small"
 					label="Search"
-					placeholder="Search for pokemons"
+					placeholder="Buscar un Pokémon"
 					value={searchTerm}>
 				</lightning-input>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons.data} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
-							<c-pokemon-tile pokemon={pokemon} onbearview={handleBearView}></c-pokemon-tile>
+							<c-pokemon-tile pokemon={pokemon} onpokemonview={handlePokemonView}></c-pokemon-tile>
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>
-				<!-- No bears found -->
+				<!-- No pokemons found -->
 				<template if:false={hasResults}>
 					<div class="slds-align_absolute-center slds-var-m-vertical_small">
-						Lo siento, no se encontraron resultados...
+						No se encontraron resultados...
 					</div>
 				</template>
 			</template>
