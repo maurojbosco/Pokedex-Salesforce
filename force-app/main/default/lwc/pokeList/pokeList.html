@@ -1,0 +1,37 @@
+<template>
+	<lightning-card title="Pokemons" >
+		<div class="slds-card__body slds-card__body_inner">
+			<!-- Start pokemons list -->
+			<template if:true={pokemons.data}>
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for pokemons"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={pokemons.data} for:item="pokemon">
+						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
+							<c-pokemon-tile pokemon={pokemon} onbearview={handleBearView}></c-pokemon-tile>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No bears found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						Lo siento, no se encontraron resultados...
+					</div>
+				</template>
+			</template>
+			<!-- End pokemon list -->
+			<!-- Data failed to load -->
+			<template if:true={pokemons.error}>
+				<div class="slds-text-color_error">
+					Ocurrio un error mientras se cargaba la lista
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
