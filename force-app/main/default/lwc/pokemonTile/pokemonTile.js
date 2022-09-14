@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-//import ursusResources from '@salesforce/resourceUrl/ursus_park';
+
 export default class PokemonTile extends LightningElement {
 	@api pokemon;
 

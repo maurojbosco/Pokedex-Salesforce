@@ -3,14 +3,36 @@
 		<div class="slds-card__body slds-card__body_inner">
 			<!-- Start pokemons list -->
 			<template if:true={pokemons.data}>
-				<lightning-input type="search"
-					onchange={handleSearchTermChange}
-					variant="label-hidden"
-					class="slds-var-m-bottom_small"
-					label="Search"
-					placeholder="Buscar un Pokémon"
-					value={searchTerm}>
-				</lightning-input>
+				<td scope="col">
+					<lightning-input 
+						type="search"
+						onchange={handleSearchTermChange}
+						class="slds-var-m-bottom_small"
+						label="Buscar"
+						placeholder="Buscar un Pokémon"
+						value={searchTerm}>
+					</lightning-input>
+				</td>
+				<td scope="col">
+					<lightning-combobox
+                    	name="Generación"
+                    	label="Generación"
+                    	value={priority}
+                    	placeholder="Filtrar por Generación"
+                		options={tiposPickListValues}
+                    	onchange={handleChange}
+                	></lightning-combobox>
+				</td>
+				<td scope="col">
+					<lightning-combobox
+                    	name="Tipos"
+                    	label="Tipos"
+                    	value={tipos}
+                   	 	placeholder="Filtrar por Tipo"
+                		options={tiposPickListValues}
+                    	onchange={handleChange}
+                	></lightning-combobox>
+				</td>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons.data} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
