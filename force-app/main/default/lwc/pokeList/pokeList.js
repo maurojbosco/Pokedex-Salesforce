@@ -56,7 +56,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
     }
 	@track value;
 	@track tiposOptions = [
-		{ label : 'Todos', value: ''},
+		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Normal', value: 'Normal'},
 		{ label : 'Fighting', value: 'Fighting'},
 		{ label : 'Flying', value: 'Flying'},
@@ -80,16 +80,20 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 
 	handleTiposChange(event) {
 		if(!this.allTiposValues.includes(event.target.name)
+		& event.detail.value != 'Todos'
+		& this.tipo2 != event.detail.value
 		& this.tipo1==''){
 			this.tipo1 = event.detail.value;
 			this.allTiposValues.push(event.detail.value);
 		} 
 		if(!this.allTiposValues.includes(event.target.name)
-		& this.tipo1 != event.detail.value & this.tipo2==''){
+		& event.detail.value != 'Todos' 
+		& this.tipo1 != event.detail.value
+		& this.tipo2==''){
 			this.tipo2 = event.detail.value;
 			this.allTiposValues.push(event.detail.value);
 		}
-		if(event.target.name == 'Todos'){
+		if(event.detail.value == 'Todos'){
 			this.tipo1 = '';
 			this.tipo2 = '';
 			this.allTiposValues = [];
