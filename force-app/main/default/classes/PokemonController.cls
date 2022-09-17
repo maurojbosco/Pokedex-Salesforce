@@ -1,65 +1,27 @@
 public with sharing class PokemonController {
-    @AuraEnabled(cacheable=true scope='global')
-    public static Pokemon__c[] getAllPokemons() {
-        return [
-            SELECT
-                Id,
-                Name,
-                Tipos__c,
-                Altura__c,
-                Peso__c,
-                Generacion__c,
-                Imagen__c,
-                ExtId__c
-            FROM Pokemon__c
-            WITH SECURITY_ENFORCED
-            ORDER BY ExtId__c
-        ];
-    }
-
-    @AuraEnabled(cacheable=true scope='global')
-    public static Pokemon__c[] searchPokemons(String searchTerm) {
-        // Return all pokemons when no search term
-        searchTerm = searchTerm.trim();
-        if (searchTerm == '') {
-            return getAllPokemons();
+    @AuraEnabled(cacheable=true)
+    public static List<Pokemon__c> getPokemons(
+        String nombre,
+        String generacion,
+        string tipo1,
+        String tipo2){
+        String query;
+        String condicion = (String.isNotBlank(nombre)?'Name LIKE \''+'%' + nombre + '%\'':'');
+        condicion += (String.isNotBlank(generacion)
+            ? (String.isNotBlank(condicion)?+' AND':'') +' Generacion__c = ' + generacion +'': '');
+        condicion += (String.isNotBlank(tipo1)
+            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo1 +'\')':'');
+        condicion += (String.isNotBlank(tipo2)
+            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')':'');  
+        if (String.isNotBlank(condicion)) {
+            query =
+                'SELECT Generacion__c, Imagen__c, Name, ExtId__c, Tipos__c, Peso__c, Altura__c FROM Pokemon__c WHERE ' +
+                condicion +
+                ' ORDER BY ExtId__c';
+        } else {
+            query = 'SELECT Generacion__c, Imagen__c, Name, ExtId__c, Tipos__c, Peso__c, Altura__c FROM Pokemon__c ORDER BY ExtId__c';
         }
-        // Prepare query paramters
-        searchTerm = '%' + searchTerm + '%';
-        // Execute search query
-        return [
-            SELECT
-                Id,
-                Name,
-                Tipos__c,
-                Altura__c,
-                Peso__c,
-                Generacion__c,
-                Imagen__c,
-                ExtId__c
-            FROM Pokemon__c
-            WHERE Name LIKE :searchTerm
-            WITH SECURITY_ENFORCED
-            ORDER BY Name
-        ];
-    }
-    @AuraEnabled(cacheable=true scope='global')
-    public static Pokemon__c[] searchGeneration(Integer searchTerm) {
-        // Execute search query
-        return [
-            SELECT
-                Id,
-                Name,
-                Tipos__c,
-                Altura__c,
-                Peso__c,
-                Generacion__c,
-                Imagen__c,
-                ExtId__c
-            FROM Pokemon__c
-            WHERE Generacion__c = :searchTerm
-            WITH SECURITY_ENFORCED
-            ORDER BY ExtId__c
-        ];
+        List<Pokemon__c> pokemons = Database.query(query);
+        return pokemons;
     }
 }

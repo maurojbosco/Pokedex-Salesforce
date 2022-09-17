@@ -1,39 +1,28 @@
 import { NavigationMixin } from 'lightning/navigation';
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
 /** PokemonController.searchPokemons(searchTerm) Apex method */
-import searchPokemons from '@salesforce/apex/PokemonController.searchPokemons';
-import { getPicklistValues } from "lightning/uiObjectInfoApi";
+import getPokemons from '@salesforce/apex/PokemonController.getPokemons';
 import TIPOS_FIELD from '@salesforce/schema/Pokemon__c.Tipos__c';
+import StayInTouchSubject from '@salesforce/schema/User.StayInTouchSubject';
+import CustomerSignedTitle from '@salesforce/schema/Contract.CustomerSignedTitle';
 export default class PokeList extends NavigationMixin(LightningElement) {
-	searchTerm = '';
+	nombre = '';
+	generacion = null;
+    tipo1 = '';  // aca si la pongo null me anda, asi no.
+	tipo2 = '';
 	pokemons;
+	/*pokemons;*/
 
-	generacionPickListValues;
-	tiposPickListValues;
+	//generacionPickListValues;
 
-    @wire(searchPokemons, {searchTerm: '$searchTerm'})
-    loadPokemons(result) {
-    this.pokemons = result;
-    	if (result.data) {
-        	const message = {
-        	pokemons: result.data
-    		};
-    	}
-	}
-	@wire(getPicklistValues, {
-        recordTypeId: "01I8c000005EQOD",
-        fieldApiName: TIPOS_FIELD
-	})
-	tiposPickLists({ error, data }) {
-        if (error) {
-            console.error("error", error);
-        } else if (data) {
-            this.tiposPickListValues = [
-                { label: "All", value: null },
-                ...data.values
-            ];
-        }
-    }
+    @wire(getPokemons, {
+        nombre: "$nombre",
+        generacion: "$generacion",
+        tipo1: "$tipo1",
+		tipo2: "$tipo2"
+    })
+	pokemons;
+	
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as
 		// long as this function is being called within a delay of 300 ms.
@@ -42,7 +31,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		const searchTerm = event.target.value;
 		// eslint-disable-next-line @lwc/lwc/no-async-operation
 		this.delayTimeout = setTimeout(() => {
-			this.searchTerm = searchTerm;
+			this.nombre = searchTerm;
 		}, 300);
 	}
 	get hasResults() {
@@ -64,5 +53,79 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	handleChange(event) {
         this[event.target.name] = event.target.value;
         console.log("change", this[event.target.name]);
+    }
+	@track value;
+	@track tiposOptions = [
+		{ label : 'Todos', value: ''},
+		{ label : 'Normal', value: 'Normal'},
+		{ label : 'Fighting', value: 'Fighting'},
+		{ label : 'Flying', value: 'Flying'},
+		{ label : 'Poison', value: 'Poison'},
+		{ label : 'Ground', value: 'Ground'},
+		{ label : 'Rock', value: 'Rock'},
+		{ label : 'Bug', value: 'Bug'},
+		{ label : 'Ghost', value: 'Ghost'},
+		{ label : 'Steel', value: 'Steel'},
+		{ label : 'Fire', value: 'Fire'},
+		{ label : 'Water', value: 'Water'},
+		{ label : 'Grass', value: 'Grass'},
+		{ label : 'Electric', value: 'Electric'},
+		{ label : 'Psychic', value: 'Psychic'},
+		{ label : 'Ice', value: 'Ice'},
+		{ label : 'Dragon', value: 'Dragon'},
+		{ label : 'Dark', value: 'Dark'},
+		{ label : 'Fairy', value: 'Fairy'},
+	]
+	@track allTiposValues= [];
+
+	handleTiposChange(event) {
+		if(!this.allTiposValues.includes(event.target.name)
+		& this.tipo1==''){
+			this.tipo1 = event.detail.value;
+			this.allTiposValues.push(event.detail.value);
+		} 
+		if(!this.allTiposValues.includes(event.target.name)
+		& this.tipo1 != event.detail.value & this.tipo2==''){
+			this.tipo2 = event.detail.value;
+			this.allTiposValues.push(event.detail.value);
+		}
+		if(event.target.name == 'Todos'){
+			this.tipo1 = '';
+			this.tipo2 = '';
+		}
+
+		console.log('tipo 1 change='+this.tipo1);
+		console.log('tipo 2 change='+this.tipo2);
+		console.log(this.allTiposValues);
+	}
+
+	handleTiposRemove(event){
+		const valueRemoved = event.target.name;
+		this.allTiposValues.splice(this.allTiposValues.indexOf(valueRemoved),1);
+		if (this.tipo1 == valueRemoved){
+			this.tipo1 = '';
+		}
+		if (this.tipo2 == valueRemoved){
+			this.tipo2 == '';
+		}
+		console.log('tipo 1 remove='+this.tipo1);
+		console.log('tipo 2 remove='+this.tipo2);
+		console.log(this.allTiposValues);
+
+	}
+	@track generacionOptions = [
+			{ label: 'Todas', value: ''},
+            { label: 'generacion 1', value: '1' },
+            { label: 'generacion 2', value: '2' },
+            { label: 'generacion 3', value: '3' },
+            { label: 'generacion 4', value: '4' },
+            { label: 'generacion 5', value: '5' },
+            { label: 'generacion 6', value: '6' },
+            { label: 'generacion 7', value: '7' },
+            { label: 'generacion 8', value: '8' }
+        ]
+
+    handleGeneracionChange(event){
+        this.generacion = event.detail.value
     }
 }

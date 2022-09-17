@@ -10,49 +10,41 @@
 						class="slds-var-m-bottom_small"
 						label="Buscar"
 						placeholder="Buscar un Pokémon"
-						value={searchTerm}>
+						value={nombre}>
 					</lightning-input>
 				</td>
+
 				<td scope="col">
 					<lightning-combobox
                     	name="Generación"
                     	label="Generación"
-                    	value={priority}
+                    	value={value}
                     	placeholder="Filtrar por Generación"
-                		options={tiposPickListValues}
-                    	onchange={handleChange}
+                		options={generacionOptions}
+                    	onchange={handleGeneracionChange}
                 	></lightning-combobox>
 				</td>
 				<td scope="col">
 					<lightning-combobox
                     	name="Tipos"
                     	label="Tipos"
-                    	value={tipos}
+                    	value={value}
                    	 	placeholder="Filtrar por Tipo"
-                		options={tiposPickListValues}
-                    	onchange={handleChange}
+                		options={tiposOptions}
+                    	onchange={handleTiposChange}
                 	></lightning-combobox>
 				</td>
+				<template for:each={allTiposValues} for:item="val">
+					<lightning-pill key={val} label={val} name={val} onremove={handleTiposRemove}></lightning-pill>
+				</template>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons.data} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
 							<c-pokemon-tile pokemon={pokemon} onpokemonview={handlePokemonView}></c-pokemon-tile>
 						</lightning-layout-item>
 					</template>
+					
 				</lightning-layout>
-				<!-- No pokemons found -->
-				<template if:false={hasResults}>
-					<div class="slds-align_absolute-center slds-var-m-vertical_small">
-						No se encontraron resultados...
-					</div>
-				</template>
-			</template>
-			<!-- End pokemon list -->
-			<!-- Data failed to load -->
-			<template if:true={pokemons.error}>
-				<div class="slds-text-color_error">
-					Ocurrio un error mientras se cargaba la lista
-				</div>
 			</template>
 		</div>
 	</lightning-card>
