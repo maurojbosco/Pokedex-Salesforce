@@ -76,7 +76,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		{ label : 'Dark', value: 'Dark'},
 		{ label : 'Fairy', value: 'Fairy'},
 	]
-	@track allTiposValues= [];
+	@track allTiposValues = [];
 
 	handleTiposChange(event) {
 		if(!this.allTiposValues.includes(event.target.name)
@@ -92,25 +92,27 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		if(event.target.name == 'Todos'){
 			this.tipo1 = '';
 			this.tipo2 = '';
+			this.allTiposValues = [];
 		}
 
 		console.log('tipo 1 change='+this.tipo1);
 		console.log('tipo 2 change='+this.tipo2);
-		console.log(this.allTiposValues);
+		console.log(JSON.stringify(this.allTiposValues));
 	}
 
 	handleTiposRemove(event){
 		const valueRemoved = event.target.name;
-		this.allTiposValues.splice(this.allTiposValues.indexOf(valueRemoved),1);
+		
 		if (this.tipo1 == valueRemoved){
 			this.tipo1 = '';
 		}
 		if (this.tipo2 == valueRemoved){
-			this.tipo2 == '';
+			this.tipo2 = '';
 		}
+		this.allTiposValues.splice(this.allTiposValues.indexOf(valueRemoved),1);
 		console.log('tipo 1 remove='+this.tipo1);
 		console.log('tipo 2 remove='+this.tipo2);
-		console.log(this.allTiposValues);
+		console.log(JSON.stringify(this.allTiposValues));
 
 	}
 	@track generacionOptions = [
