@@ -1,8 +1,8 @@
 <template>
-    <lightning-card title={pokemon.Name} class="pokemon-tile">
+    <lightning-card title={pokemon.Name} class="slds-show pokemon-tile">
             <div class="slds-media">
                 <div class="slds-media__figure">
-                    <button style="background-color:rgb(31, 31, 31)">
+                    <button class= "slds-m-left_x-small">
                         <img src={pokemon.Imagen__c} 
                          width="175" height="175"
                          onclick={handleOpenRecordClick}/>

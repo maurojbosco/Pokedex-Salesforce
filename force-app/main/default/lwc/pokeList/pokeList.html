@@ -2,7 +2,8 @@
 	<lightning-card title="Pokemons" >
 		<div class="slds-card__body slds-card__body_inner">
 			<!-- Start pokemons list -->
-			<template if:true={pokemons.data}>
+			<template if:true={pokemons}>
+					
 				<td scope="col">
 					<lightning-input 
 						type="search"
@@ -26,18 +27,21 @@
 				<td scope="col">
 					<lightning-combobox
                     	name="Tipos"
-                    	label="Tipos"
+                    	label="Tipos (máximo 2)"
                     	value={value}
-                   	 	placeholder="Filtrar por Tipo"
+                   	 	placeholder="Filtrar por Tipos"
                 		options={tiposOptions}
                     	onchange={handleTiposChange}
                 	></lightning-combobox>
 				</td>
-				<template for:each={allTiposValues} for:item="val">
-					<lightning-pill key={val} label={val} name={val} onremove={handleTiposRemove}></lightning-pill>
-				</template>
+					<template for:each={allTiposValues} for:item="val">
+						<lightning-pill key={val} label={val} name={val} onremove={handleTiposRemove}></lightning-pill>
+					</template>
+				<lightning-layout>
+					<p class="slds-var-m-bottom_xx-small"><b>Cantidad de Pokemons: </b>{numberOfPoks}</p> 
+				</lightning-layout>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={pokemons.data} for:item="pokemon">
+					<template for:each={pokemons} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
 							<c-pokemon-tile pokemon={pokemon} onpokemonview={handlePokemonView}></c-pokemon-tile>
 						</lightning-layout-item>

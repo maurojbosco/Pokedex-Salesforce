@@ -1,16 +1,14 @@
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, wire, track } from 'lwc';
-/** PokemonController.searchPokemons(searchTerm) Apex method */
 import getPokemons from '@salesforce/apex/PokemonController.getPokemons';
-import TIPOS_FIELD from '@salesforce/schema/Pokemon__c.Tipos__c';
-import StayInTouchSubject from '@salesforce/schema/User.StayInTouchSubject';
-import CustomerSignedTitle from '@salesforce/schema/Contract.CustomerSignedTitle';
 export default class PokeList extends NavigationMixin(LightningElement) {
-	nombre = '';
-	generacion = null;
-    tipo1 = '';  // aca si la pongo null me anda, asi no.
-	tipo2 = '';
-	pokemons;
+	@track nombre = '';
+	@track generacion = null;
+    @track tipo1 = ''; 
+	@track tipo2 = '';
+	@track pokemons = [];
+	@track numberOfPoks;
+	
 	/*pokemons;*/
 
 	//generacionPickListValues;
@@ -21,7 +19,31 @@ export default class PokeList extends NavigationMixin(LightningElement) {
         tipo1: "$tipo1",
 		tipo2: "$tipo2"
     })
-	pokemons;
+	wiredPokemons({error, data}) {
+		if (data) {
+            this.pokemons = data;
+            this.error = undefined;
+			
+        } else if (error) {
+            this.error = error;
+            this.pokemons = undefined;
+        }
+		this.numberOfPoks = this.pokemons.length;
+
+	}
+	
+	/*@wire(countPokemons,{
+		nombre: "$nombre",
+        generacion: "$generacion",
+        tipo1: "$tipo1",
+		tipo2: "$tipo2"
+	})
+	 wiredCount({data}){
+		if (data) {
+            this.numberOfPoks = data;
+
+        } 
+	 }*/
 	
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as
@@ -54,7 +76,6 @@ export default class PokeList extends NavigationMixin(LightningElement) {
         this[event.target.name] = event.target.value;
         console.log("change", this[event.target.name]);
     }
-	@track value;
 	@track tiposOptions = [
 		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Normal', value: 'Normal'},

@@ -12,7 +12,32 @@ public with sharing class PokemonController {
         condicion += (String.isNotBlank(tipo1)
             ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo1 +'\')':'');
         condicion += (String.isNotBlank(tipo2)
-            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')':'');  
+            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')':'');
+        /*String condicion;
+        if (String.isNotBlank(nombre)){
+            condicion = 'Name LIKE \''+'%' + nombre + '%\'';
+        }
+        if (String.isNotBlank(generacion)) {
+            if (String.isNotBlank(condicion)){
+                condicion +=' AND Generacion__c = ' + generacion +'';
+            } else {
+                condicion +=' Generacion__c = ' + generacion +'';
+            }
+        }
+        if (String.isNotBlank(tipo1)) {
+            if(String.isNotBlank(condicion)) {
+                condicion += ' AND Tipos__c INCLUDES ' + '(\'' +tipo1 +'\')';
+            } else {
+                condicion += ' Tipos__c INCLUDES ' + '(\'' +tipo1 +'\')';
+            }
+        }
+        if (String.isNotBlank(tipo2)) {
+            if(String.isNotBlank(condicion)) {
+                condicion += ' AND Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')';
+            } else {
+                condicion += ' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')';
+            }
+        }*/
         if (String.isNotBlank(condicion)) {
             query =
                 'SELECT Generacion__c, Imagen__c, Name, ExtId__c, Tipos__c, Peso__c, Altura__c FROM Pokemon__c WHERE ' +
