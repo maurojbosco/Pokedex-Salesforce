@@ -6,14 +6,14 @@ public with sharing class PokemonController {
         string tipo1,
         String tipo2){
         String query;
-        String condicion = (String.isNotBlank(nombre)?'Name LIKE \''+'%' + nombre + '%\'':'');
+        /*String condicion = (String.isNotBlank(nombre)?'Name LIKE \''+'%' + nombre + '%\'':'');
         condicion += (String.isNotBlank(generacion)
             ? (String.isNotBlank(condicion)?+' AND':'') +' Generacion__c = ' + generacion +'': '');
         condicion += (String.isNotBlank(tipo1)
             ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo1 +'\')':'');
         condicion += (String.isNotBlank(tipo2)
-            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')':'');
-        /*String condicion;
+            ? (String.isNotBlank(condicion)?+' AND':'') +' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')':'');*/
+        String condicion ='';
         if (String.isNotBlank(nombre)){
             condicion = 'Name LIKE \''+'%' + nombre + '%\'';
         }
@@ -37,7 +37,7 @@ public with sharing class PokemonController {
             } else {
                 condicion += ' Tipos__c INCLUDES ' + '(\'' +tipo2 +'\')';
             }
-        }*/
+        }
         if (String.isNotBlank(condicion)) {
             query =
                 'SELECT Generacion__c, Imagen__c, Name, ExtId__c, Tipos__c, Peso__c, Altura__c FROM Pokemon__c WHERE ' +

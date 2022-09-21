@@ -1,6 +1,7 @@
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, wire, track } from 'lwc';
 import getPokemons from '@salesforce/apex/PokemonController.getPokemons';
+
 export default class PokeList extends NavigationMixin(LightningElement) {
 	@track nombre = '';
 	@track generacion = null;
@@ -8,10 +9,6 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	@track tipo2 = '';
 	@track pokemons = [];
 	@track numberOfPoks;
-	
-	/*pokemons;*/
-
-	//generacionPickListValues;
 
     @wire(getPokemons, {
         nombre: "$nombre",
@@ -31,20 +28,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		this.numberOfPoks = this.pokemons.length;
 
 	}
-	
-	/*@wire(countPokemons,{
-		nombre: "$nombre",
-        generacion: "$generacion",
-        tipo1: "$tipo1",
-		tipo2: "$tipo2"
-	})
-	 wiredCount({data}){
-		if (data) {
-            this.numberOfPoks = data;
 
-        } 
-	 }*/
-	
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as
 		// long as this function is being called within a delay of 300 ms.
@@ -79,23 +63,23 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	@track tiposOptions = [
 		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Normal', value: 'Normal'},
-		{ label : 'Fighting', value: 'Fighting'},
-		{ label : 'Flying', value: 'Flying'},
-		{ label : 'Poison', value: 'Poison'},
-		{ label : 'Ground', value: 'Ground'},
-		{ label : 'Rock', value: 'Rock'},
-		{ label : 'Bug', value: 'Bug'},
-		{ label : 'Ghost', value: 'Ghost'},
-		{ label : 'Steel', value: 'Steel'},
-		{ label : 'Fire', value: 'Fire'},
-		{ label : 'Water', value: 'Water'},
-		{ label : 'Grass', value: 'Grass'},
-		{ label : 'Electric', value: 'Electric'},
-		{ label : 'Psychic', value: 'Psychic'},
-		{ label : 'Ice', value: 'Ice'},
-		{ label : 'Dragon', value: 'Dragon'},
-		{ label : 'Dark', value: 'Dark'},
-		{ label : 'Fairy', value: 'Fairy'},
+		{ label : 'Lucha', value: 'Fighting'},
+		{ label : 'Volador', value: 'Flying'},
+		{ label : 'Veneno', value: 'Poison'},
+		{ label : 'Tierra', value: 'Ground'},
+		{ label : 'Roca', value: 'Rock'},
+		{ label : 'Bicho', value: 'Bug'},
+		{ label : 'Fantasma', value: 'Ghost'},
+		{ label : 'Acero', value: 'Steel'},
+		{ label : 'Fuego', value: 'Fire'},
+		{ label : 'Agua', value: 'Water'},
+		{ label : 'Planta', value: 'Grass'},
+		{ label : 'Eléctrico', value: 'Electric'},
+		{ label : 'Psíquico', value: 'Psychic'},
+		{ label : 'Hielo', value: 'Ice'},
+		{ label : 'Dragón', value: 'Dragon'},
+		{ label : 'Oscuro', value: 'Dark'},
+		{ label : 'Hada', value: 'Fairy'},
 	]
 	@track allTiposValues = [];
 
@@ -142,14 +126,14 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	}
 	@track generacionOptions = [
 			{ label: 'Todas', value: ''},
-            { label: 'generacion 1', value: '1' },
-            { label: 'generacion 2', value: '2' },
-            { label: 'generacion 3', value: '3' },
-            { label: 'generacion 4', value: '4' },
-            { label: 'generacion 5', value: '5' },
-            { label: 'generacion 6', value: '6' },
-            { label: 'generacion 7', value: '7' },
-            { label: 'generacion 8', value: '8' }
+            { label: 'Generación 1', value: '1' },
+            { label: 'Generación 2', value: '2' },
+            { label: 'Generación 3', value: '3' },
+            { label: 'Generación 4', value: '4' },
+            { label: 'Generación 5', value: '5' },
+            { label: 'Generación 6', value: '6' },
+            { label: 'Generación 7', value: '7' },
+            { label: 'Generación 8', value: '8' }
         ]
 
     handleGeneracionChange(event){
