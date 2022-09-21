@@ -41,7 +41,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		}, 300);
 	}
 	get hasResults() {
-		return (this.pokemons.data.length > 0);
+		return (this.pokemons.length > 0);
 	}
 	handlePokemonView(event) {
 		// Get pokemon record id from pokemonview event
@@ -62,24 +62,24 @@ export default class PokeList extends NavigationMixin(LightningElement) {
     }
 	@track tiposOptions = [
 		{ label : 'Todos', value: 'Todos'},
-		{ label : 'Normal', value: 'Normal'},
-		{ label : 'Lucha', value: 'Fighting'},
-		{ label : 'Volador', value: 'Flying'},
-		{ label : 'Veneno', value: 'Poison'},
-		{ label : 'Tierra', value: 'Ground'},
-		{ label : 'Roca', value: 'Rock'},
-		{ label : 'Bicho', value: 'Bug'},
-		{ label : 'Fantasma', value: 'Ghost'},
-		{ label : 'Acero', value: 'Steel'},
-		{ label : 'Fuego', value: 'Fire'},
-		{ label : 'Agua', value: 'Water'},
-		{ label : 'Planta', value: 'Grass'},
-		{ label : 'Eléctrico', value: 'Electric'},
-		{ label : 'Psíquico', value: 'Psychic'},
-		{ label : 'Hielo', value: 'Ice'},
-		{ label : 'Dragón', value: 'Dragon'},
-		{ label : 'Oscuro', value: 'Dark'},
-		{ label : 'Hada', value: 'Fairy'},
+		{ label : 'Normal (Normal)', value: 'Normal'},
+		{ label :'Fighting (Luchador)', value: 'Fighting'},
+		{ label : 'Flying (Volador)', value: 'Flying'},
+		{ label : 'Poison (Veneno)', value: 'Poison'},
+		{ label : 'Ground (Tierra)', value: 'Ground'},
+		{ label : 'Rock (Roca)', value: 'Rock'},
+		{ label : 'Bug (Bicho)', value: 'Bug'},
+		{ label : 'Ghost (Fantasma)', value: 'Ghost'},
+		{ label : 'Steel (Acero)', value: 'Steel'},
+		{ label : 'Fire (Fuego)', value: 'Fire'},
+		{ label : 'Water (Agua)', value: 'Water'},
+		{ label : 'Grass (Planta)', value: 'Grass'},
+		{ label : 'Electric (Eléctrico)', value: 'Electric'},
+		{ label : 'Psychic (Psíquico)', value: 'Psychic'},
+		{ label : 'Ice (Hielo)', value: 'Ice'},
+		{ label : 'Dragon (Dragón)', value: 'Dragon'},
+		{ label : 'Dark (Oscuro)', value: 'Dark'},
+		{ label : 'Fairy (Hada)', value: 'Fairy'},
 	]
 	@track allTiposValues = [];
 

@@ -1,5 +1,5 @@
 <template>
-	<lightning-card title="Pokemons" >
+	<lightning-card title="Pokémons" >
 		<div class="slds-card__body slds-card__body_inner">
 			<!-- Start pokemons list -->
 			<template if:true={pokemons}>	
@@ -37,7 +37,7 @@
 						<lightning-pill key={val} label={val} name={val} onremove={handleTiposRemove}></lightning-pill>
 					</template>
 				<lightning-layout>
-					<p class="slds-var-m-bottom_xx-small"><b>Cantidad de Pokemons: </b>{numberOfPoks}</p> 
+					<p class="slds-var-m-bottom_xx-small"><b>Cantidad de Pokémons: </b>{numberOfPoks}</p> 
 				</lightning-layout>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons} for:item="pokemon">
