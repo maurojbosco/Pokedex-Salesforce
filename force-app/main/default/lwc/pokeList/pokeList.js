@@ -9,6 +9,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	@track tipo2 = '';
 	@track pokemons = [];
 	@track numberOfPoks;
+	@track error;
 
     @wire(getPokemons, {
         nombre: "$nombre",
@@ -41,7 +42,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		}, 300);
 	}
 	get hasResults() {
-		return (this.pokemons.length > 0);
+		return (this.numberOfPoks > 0);
 	}
 	handlePokemonView(event) {
 		// Get pokemon record id from pokemonview event
