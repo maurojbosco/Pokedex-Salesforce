@@ -57,10 +57,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 			},
 		});
 	}
-	handleChange(event) {
-        this[event.target.name] = event.target.value;
-        console.log("change", this[event.target.name]);
-    }
+	
 	@track tiposOptions = [
 		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Normal (Normal)', value: 'Normal'},
