@@ -1,7 +1,7 @@
 :host {
-	--sds-c-card-color-background:  rgba(255, 60, 0, 0.918);
+	--slds-c-card-color-background:  rgba(255, 60, 0, 0.918);
 }
-.pokemon-tile {
+.poke-card {
 	
 	border: 1px solid #000000;
 	border-radius: .25rem;

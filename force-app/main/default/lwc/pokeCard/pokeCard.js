@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class PokemonTile extends LightningElement {
+export default class PokeCard extends LightningElement {
 	@api pokemon;
 
     handleOpenRecordClick() {

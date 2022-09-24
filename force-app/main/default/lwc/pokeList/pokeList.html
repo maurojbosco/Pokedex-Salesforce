@@ -1,7 +1,6 @@
 <template>
 	<lightning-card title="Pokémons" >
 		<div class="slds-card__body slds-card__body_inner">
-			<!-- Start pokemons list -->
 			<template if:true={pokemons}>	
 				<td scope="col">
 					<lightning-input 
@@ -42,7 +41,7 @@
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons} for:item="pokemon">
 						<lightning-layout-item key={pokemon.Id} size="3" class="slds-var-p-around_x-small">
-							<c-pokemon-tile pokemon={pokemon} onpokemonview={handlePokemonView}></c-pokemon-tile>
+							<c-poke-card pokemon={pokemon} onpokemonview={handlePokemonView}></c-poke-card>
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>
