@@ -8,8 +8,8 @@
 	background-color: rgb(211, 60, 0);
 	box-shadow:5px 5px 5px grey;
 }
-.slds-m-left_x-small {
+.poke-button {
 	background-color:rgb(31, 31, 31);
-	border: 8px solid rgb(153, 153, 153);
+	border: 6px solid rgb(172, 172, 172);
 	border-radius: .50rem;
 }

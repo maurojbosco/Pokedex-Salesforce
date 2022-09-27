@@ -2,18 +2,18 @@
     <lightning-card title={pokemon.Name} class="slds-show poke-card">
             <div class="slds-media">
                 <div class="slds-media__figure">
-                    <button class= "slds-m-left_x-small">
+                    <button class="poke-button">
                         <img src={pokemon.Imagen__c} 
                          width="165" height="165"
                          onclick={handleOpenRecordClick}
                          /></button> 
                 </div>
                 <div class="slds-media__body">
-                    <p class="slds-var-m-bottom_xx-small"><b># </b>{pokemon.ExtId__c}</p>
-                    <p class="slds-var-m-bottom_xx-small"><b>Generación: </b>{pokemon.Generacion__c}</p>
-                    <p class="slds-var-m-bottom_xx-small"><b>Altura: </b>{pokemon.Altura__c} m</p>
-                    <p class="slds-var-m-bottom_xx-small"><b>Peso: </b>{pokemon.Peso__c} kg</p>
-                    <p class="slds-var-m-bottom_xx-small"><b>Tipo: </b>{pokemon.Tipos__c} </p>
+                    <p class="slds-var-m-around_small"><b>Pokémon  </b>#{pokemon.ExtId__c}</p>
+                    <p class="slds-var-m-around_small"><b>Generación: </b>{pokemon.Generacion__c}</p>
+                    <p class="slds-var-m-around_small"><b>Altura: </b>{pokemon.Altura__c} m</p>
+                    <p class="slds-var-m-around_small"><b>Peso: </b>{pokemon.Peso__c} kg</p>
+                    <p class="slds-var-m-around_small"><b>Tipo: </b>{pokemon.Tipos__c} </p>
 
                 </div>
             </div>

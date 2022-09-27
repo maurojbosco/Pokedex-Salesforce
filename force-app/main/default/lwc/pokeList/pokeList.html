@@ -20,6 +20,7 @@
                     	placeholder="Filtrar por Generación"
                 		options={generacionOptions}
                     	onchange={handleGeneracionChange}
+						class="slds-var-m-left_x-large"
                 	></lightning-combobox>
 				</td>
 				<td scope="col">
@@ -30,13 +31,14 @@
                    	 	placeholder="Filtrar por Tipos"
                 		options={tiposOptions}
                     	onchange={handleTiposChange}
+						class="slds-var-m-left_x-large"
                 	></lightning-combobox>
 				</td>
 					<template for:each={allTiposValues} for:item="val">
 						<lightning-pill key={val} label={val} name={val} onremove={handleTiposRemove}></lightning-pill>
 					</template>
 				<lightning-layout>
-					<p class="slds-var-m-bottom_xx-small"><b>Cantidad de Pokémons: </b>{numberOfPoks}</p> 
+					<p class="slds-var-m-vertical_small"><b>Cantidad de Pokémons: </b>{numberOfPoks}</p> 
 				</lightning-layout>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={pokemons} for:item="pokemon">
