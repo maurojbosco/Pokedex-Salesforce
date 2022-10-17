@@ -3,13 +3,13 @@ import { LightningElement, wire, track } from 'lwc';
 import getPokemons from '@salesforce/apex/PokemonController.getPokemons';
 
 export default class PokeList extends NavigationMixin(LightningElement) {
-	@track nombre = '';
-	@track generacion = null;
-    @track tipo1 = ''; 
-	@track tipo2 = '';
+	nombre = '';
+	generacion = null;
+    tipo1 = ''; 
+	tipo2 = '';
 	@track pokemons = [];
-	@track numberOfPoks;
-	@track error;
+	numberOfPoks;
+	error;
 
     @wire(getPokemons, {
         nombre: "$nombre",
@@ -46,7 +46,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	}
 	handlePokemonView(event) {
 		// Get pokemon record id from pokemonview event
-		const PokemonId = event.detail;
+		const PokemonId = event.target;
 		// Navigate to pokemon record page
 		this[NavigationMixin.Navigate]({
 			type: 'standard__recordPage',
@@ -58,7 +58,8 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		});
 	}
 	
-	@track tiposOptions = [
+	get tiposOptions() {
+		return [
 		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Normal (Normal)', value: 'Normal'},
 		{ label :'Fighting (Luchador)', value: 'Fighting'},
@@ -78,25 +79,25 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		{ label : 'Dragon (Dragón)', value: 'Dragon'},
 		{ label : 'Dark (Oscuro)', value: 'Dark'},
 		{ label : 'Fairy (Hada)', value: 'Fairy'},
-	]
+	]}
 	@track allTiposValues = [];
 
 	handleTiposChange(event) {
 		if(!this.allTiposValues.includes(event.target.name)
-		& event.detail.value != 'Todos'
-		& this.tipo2 != event.detail.value
+		& event.target.value != 'Todos'
+		& this.tipo2 != event.target.value
 		& this.tipo1==''){
-			this.tipo1 = event.detail.value;
-			this.allTiposValues.push(event.detail.value);
+			this.tipo1 = event.target.value;
+			this.allTiposValues.push(event.target.value);
 		} 
 		if(!this.allTiposValues.includes(event.target.name)
-		& event.detail.value != 'Todos' 
-		& this.tipo1 != event.detail.value
+		& event.target.value != 'Todos' 
+		& this.tipo1 != event.target.value
 		& this.tipo2==''){
-			this.tipo2 = event.detail.value;
-			this.allTiposValues.push(event.detail.value);
+			this.tipo2 = event.target.value;
+			this.allTiposValues.push(event.target.value);
 		}
-		if(event.detail.value == 'Todos'){
+		if(event.target.value == 'Todos'){
 			this.tipo1 = '';
 			this.tipo2 = '';
 			this.allTiposValues = [];
@@ -122,7 +123,8 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		console.log(JSON.stringify(this.allTiposValues));
 
 	}
-	@track generacionOptions = [
+	get generacionOptions () {
+		return [
 			{ label: 'Todas', value: ''},
             { label: 'Generación 1', value: '1' },
             { label: 'Generación 2', value: '2' },
@@ -132,9 +134,9 @@ export default class PokeList extends NavigationMixin(LightningElement) {
             { label: 'Generación 6', value: '6' },
             { label: 'Generación 7', value: '7' },
             { label: 'Generación 8', value: '8' }
-        ]
+        ]}
 
     handleGeneracionChange(event){
-        this.generacion = event.detail.value
+        this.generacion = event.target.value
     }
 }
