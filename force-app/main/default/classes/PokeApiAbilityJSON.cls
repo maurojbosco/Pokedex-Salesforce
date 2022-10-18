@@ -1,7 +1,6 @@
 public class PokeApiAbilityJSON {
-    public String id;	//1
-    public String name;	//stench
-   
+    public String id;
+    public String name;   
     public static PokeApiAbilityJSON parse(String json){
         return (PokeApiAbilityJSON) System.JSON.deserialize(json, PokeApiAbilityJSON.class);
     }

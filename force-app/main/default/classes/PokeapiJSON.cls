@@ -1,8 +1,8 @@
 public class PokeapiJSON{
-	public String height;	//3
-	public String id;	//132
-	public String name;	//ditto
-	public String weight;	//40
+	public String height;
+	public String id;
+	public String name;
+	public String weight;
     public String order;
  
 	public static PokeapiJSON parse(String json){

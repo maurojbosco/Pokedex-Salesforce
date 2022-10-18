@@ -1,11 +1,11 @@
 public class PokeapiMoveJSON{
-	public String accuracy;	//100
+	public String accuracy;
 	public String effect_chance;
-	public String id;	//1
-	public String name;	//pound
-	public String power;	//40
-	public String pp;	//35
-	public String priority;	//0
+	public String id;
+	public String name;
+	public String power;
+	public String pp;
+	public String priority;
 
 	public static PokeapiMoveJSON parse(String json){
 		return (PokeapiMoveJSON) System.JSON.deserialize(json, PokeapiMoveJSON.class);

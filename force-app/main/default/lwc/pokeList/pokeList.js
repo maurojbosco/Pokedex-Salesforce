@@ -47,7 +47,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 
 	handlePokemonView(event) {
 		// Get pokemon record id from pokemonview event
-		const PokemonId = event.target;
+		const PokemonId = event.detail;
 		// Navigate to pokemon record page
 		this[NavigationMixin.Navigate]({
 			type: 'standard__recordPage',
@@ -59,8 +59,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		});
 	}
 	
-	get tiposOptions() {
-		return [
+	tiposOptions = [
 		{ label : 'Todos', value: 'Todos'},
 		{ label : 'Bug (Bicho)', value: 'Bug'},
 		{ label : 'Dark (Oscuro)', value: 'Dark'},
@@ -79,9 +78,8 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		{ label : 'Psychic (Psíquico)', value: 'Psychic'},
 		{ label : 'Rock (Roca)', value: 'Rock'},
 		{ label : 'Steel (Acero)', value: 'Steel'},
-		{ label : 'Water (Agua)', value: 'Water'},
-		]
-	}
+		{ label : 'Water (Agua)', value: 'Water'}
+	]
 
 	handleTiposChange(event) {
 		if(!this.allTiposValues.includes(event.target.name)
@@ -103,10 +101,6 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 			this.tipo2 = '';
 			this.allTiposValues = [];
 		}
-
-		console.log('tipo 1 change='+this.tipo1);
-		console.log('tipo 2 change='+this.tipo2);
-		console.log(JSON.stringify(this.allTiposValues));
 	}
 
 	handleTiposRemove(event){
@@ -119,14 +113,9 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 			this.tipo2 = '';
 		}
 		this.allTiposValues.splice(this.allTiposValues.indexOf(valueRemoved),1);
-		console.log('tipo 1 remove='+this.tipo1);
-		console.log('tipo 2 remove='+this.tipo2);
-		console.log(JSON.stringify(this.allTiposValues));
-
 	}
 
-	get generacionOptions () {
-		return [
+	generacionOptions = [
 			{ label: 'Todas', value: ''},
             { label: 'Generación 1', value: '1' },
             { label: 'Generación 2', value: '2' },
@@ -136,8 +125,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
             { label: 'Generación 6', value: '6' },
             { label: 'Generación 7', value: '7' },
             { label: 'Generación 8', value: '8' }
-        ]
-	}
+    ]
 
     handleGeneracionChange(event){
         this.generacion = event.target.value
