@@ -82,21 +82,23 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	]
 
 	handleTiposChange(event) {
-		if(!this.allTiposValues.includes(event.target.name)
-		& event.target.value != 'Todos'
-		& this.tipo2 != event.target.value
-		& this.tipo1==''){
-			this.tipo1 = event.target.value;
-			this.allTiposValues.push(event.target.value);
+		const valueSelected = event.target.value;
+
+		if(!this.allTiposValues.includes(valueSelected)
+		& valueSelected != 'Todos'
+		& this.tipo2 != valueSelected
+		& this.tipo1 == ''){
+			this.tipo1 = valueSelected;
+			this.allTiposValues.push(valueSelected);
 		} 
-		if(!this.allTiposValues.includes(event.target.name)
-		& event.target.value != 'Todos' 
-		& this.tipo1 != event.target.value
-		& this.tipo2==''){
-			this.tipo2 = event.target.value;
-			this.allTiposValues.push(event.target.value);
+		if(!this.allTiposValues.includes(valueSelected)
+		& valueSelected != 'Todos' 
+		& this.tipo1 != valueSelected
+		& this.tipo2 == ''){
+			this.tipo2 = valueSelected;
+			this.allTiposValues.push(valueSelected);
 		}
-		if(event.target.value == 'Todos'){
+		if(valueSelected == 'Todos'){
 			this.tipo1 = '';
 			this.tipo2 = '';
 			this.allTiposValues = [];
@@ -104,15 +106,15 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	}
 
 	handleTiposRemove(event){
-		const valueRemoved = event.target.name;
+		const tipoRemoved = event.target.name;
 		
-		if (this.tipo1 == valueRemoved){
+		if (this.tipo1 == tipoRemoved){
 			this.tipo1 = '';
 		}
-		if (this.tipo2 == valueRemoved){
+		if (this.tipo2 == tipoRemoved){
 			this.tipo2 = '';
 		}
-		this.allTiposValues.splice(this.allTiposValues.indexOf(valueRemoved),1);
+		this.allTiposValues.splice(this.allTiposValues.indexOf(tipoRemoved),1);
 	}
 
 	generacionOptions = [
