@@ -10,6 +10,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	@track pokemons = [];
 	numberOfPoks;
 	error;
+	@track allTiposValues = [];
 
     @wire(getPokemons, {
         nombre: "$nombre",
@@ -27,7 +28,6 @@ export default class PokeList extends NavigationMixin(LightningElement) {
             this.pokemons = undefined;
         }
 		this.numberOfPoks = this.pokemons.length;
-
 	}
 
 	handleSearchTermChange(event) {
@@ -44,6 +44,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	get hasResults() {
 		return (this.numberOfPoks > 0);
 	}
+
 	handlePokemonView(event) {
 		// Get pokemon record id from pokemonview event
 		const PokemonId = event.target;
@@ -61,26 +62,26 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	get tiposOptions() {
 		return [
 		{ label : 'Todos', value: 'Todos'},
-		{ label : 'Normal (Normal)', value: 'Normal'},
-		{ label :'Fighting (Luchador)', value: 'Fighting'},
-		{ label : 'Flying (Volador)', value: 'Flying'},
-		{ label : 'Poison (Veneno)', value: 'Poison'},
-		{ label : 'Ground (Tierra)', value: 'Ground'},
-		{ label : 'Rock (Roca)', value: 'Rock'},
 		{ label : 'Bug (Bicho)', value: 'Bug'},
-		{ label : 'Ghost (Fantasma)', value: 'Ghost'},
-		{ label : 'Steel (Acero)', value: 'Steel'},
-		{ label : 'Fire (Fuego)', value: 'Fire'},
-		{ label : 'Water (Agua)', value: 'Water'},
-		{ label : 'Grass (Planta)', value: 'Grass'},
-		{ label : 'Electric (Eléctrico)', value: 'Electric'},
-		{ label : 'Psychic (Psíquico)', value: 'Psychic'},
-		{ label : 'Ice (Hielo)', value: 'Ice'},
-		{ label : 'Dragon (Dragón)', value: 'Dragon'},
 		{ label : 'Dark (Oscuro)', value: 'Dark'},
+		{ label : 'Dragon (Dragón)', value: 'Dragon'},
+		{ label : 'Electric (Eléctrico)', value: 'Electric'},
 		{ label : 'Fairy (Hada)', value: 'Fairy'},
-	]}
-	@track allTiposValues = [];
+		{ label : 'Fighting (Luchador)', value: 'Fighting'},
+		{ label : 'Fire (Fuego)', value: 'Fire'},
+		{ label : 'Flying (Volador)', value: 'Flying'},
+		{ label : 'Ghost (Fantasma)', value: 'Ghost'},
+		{ label : 'Grass (Planta)', value: 'Grass'},
+		{ label : 'Ground (Tierra)', value: 'Ground'},
+		{ label : 'Ice (Hielo)', value: 'Ice'},
+		{ label : 'Normal (Normal)', value: 'Normal'},
+		{ label : 'Poison (Veneno)', value: 'Poison'},
+		{ label : 'Psychic (Psíquico)', value: 'Psychic'},
+		{ label : 'Rock (Roca)', value: 'Rock'},
+		{ label : 'Steel (Acero)', value: 'Steel'},
+		{ label : 'Water (Agua)', value: 'Water'},
+		]
+	}
 
 	handleTiposChange(event) {
 		if(!this.allTiposValues.includes(event.target.name)
@@ -123,6 +124,7 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 		console.log(JSON.stringify(this.allTiposValues));
 
 	}
+
 	get generacionOptions () {
 		return [
 			{ label: 'Todas', value: ''},
@@ -134,7 +136,8 @@ export default class PokeList extends NavigationMixin(LightningElement) {
             { label: 'Generación 6', value: '6' },
             { label: 'Generación 7', value: '7' },
             { label: 'Generación 8', value: '8' }
-        ]}
+        ]
+	}
 
     handleGeneracionChange(event){
         this.generacion = event.target.value

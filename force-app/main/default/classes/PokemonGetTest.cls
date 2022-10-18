@@ -21,7 +21,7 @@ private class PokemonGetTest {
         
     }
     @isTest 
-    static void testInsertComletePokemon() {
+    static void testInsertCompletePokemon() {
          // Set mock callout class 
         SingleRequestMock fakeResponse = new SingleRequestMock(200,
                                                                'OK',
