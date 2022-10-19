@@ -82,23 +82,23 @@ export default class PokeList extends NavigationMixin(LightningElement) {
 	]
 
 	handleTiposChange(event) {
-		const valueSelected = event.target.value;
+		const tipoSelected = event.target.value;
 
-		if(!this.allTiposValues.includes(valueSelected)
-		& valueSelected != 'Todos'
-		& this.tipo2 != valueSelected
+		if(!this.allTiposValues.includes(tipoSelected)
+		& tipoSelected != 'Todos'
+		& this.tipo2 != tipoSelected
 		& this.tipo1 == ''){
-			this.tipo1 = valueSelected;
-			this.allTiposValues.push(valueSelected);
+			this.tipo1 = tipoSelected;
+			this.allTiposValues.push(tipoSelected);
 		} 
-		if(!this.allTiposValues.includes(valueSelected)
-		& valueSelected != 'Todos' 
-		& this.tipo1 != valueSelected
+		if(!this.allTiposValues.includes(tipoSelected)
+		& tipoSelected != 'Todos' 
+		& this.tipo1 != tipoSelected
 		& this.tipo2 == ''){
-			this.tipo2 = valueSelected;
-			this.allTiposValues.push(valueSelected);
+			this.tipo2 = tipoSelected;
+			this.allTiposValues.push(tipoSelected);
 		}
-		if(valueSelected == 'Todos'){
+		if(tipoSelected == 'Todos'){
 			this.tipo1 = '';
 			this.tipo2 = '';
 			this.allTiposValues = [];
