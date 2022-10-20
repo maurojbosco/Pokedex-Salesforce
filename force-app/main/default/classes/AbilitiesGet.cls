@@ -38,7 +38,6 @@ global class AbilitiesGet implements Database.Batchable<Integer>, Database.Allow
                     String shorteffect = (String) english.get('short_effect');
                     ability.Efecto__c = shorteffect;
                 }
-                
             }
 
             // Se inserta el objeto de tipo Habilidad__c en la base de datos

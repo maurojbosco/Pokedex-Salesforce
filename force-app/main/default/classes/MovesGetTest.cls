@@ -60,7 +60,6 @@ private class MovesGetTest {
         System.assertEquals(75, movi.Poder__c);
         System.assertEquals(10, movi.Chance_de_Efecto__c);
         System.assertEquals('Has a 10% chance to freeze the target.', movi.Efecto__c);
-         // Verify mock response is not null
     }
     @isTest 
     static void testNoResponse() {

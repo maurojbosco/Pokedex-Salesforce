@@ -50,8 +50,6 @@ private class AbilitiesGetTest {
         System.assertEquals('Liquid-ooze', habil.Name );
         System.assertEquals(64, habil.ExtId__c);
         System.assertEquals('Damages opponents using leeching moves for as much as they would heal.', habil.Efecto__c);
-         // Verify mock response is not null
-        //System.assertNotEquals(null,fakeResponse, 'The callout returned a null response.');
     }
     @isTest 
     static void testNoResponse() {
