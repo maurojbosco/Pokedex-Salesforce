@@ -86,32 +86,67 @@ global class PokemonGet implements Database.Batchable<Integer>, Database.AllowsC
             // Campo Slot(n)__c de tipo lookup al objeto Movimiento__c
             List<Object> moves = (List<Object>) pok.get('moves');
             Integer count = 0;
+            List<Integer> numMovi = new List<Integer>();
             while ( count < moves.size() && count < 4 ){
-                Map<String,Object> movesn = (Map<String,Object>) moves.get(Integer.valueOf(Math.random()*moves.size()));
-                Map<String,Object> move = (Map<String, Object>) movesn.get('move');
-                String movename = (String) move.get('name');
-                Movimiento__c movi = [SELECT Id 
-                                      FROM Movimiento__c 
-                                      WHERE Name = :movename.capitalize()
-                                      LIMIT 1];
-               
+                Integer numero = Integer.valueOf(Math.random()*moves.size());
                 if (count == 0){
-                    pokemon.Slot1__c = movi.id;
+                    numMovi.add(numero);
                     count++;
                 }
-                if (count == 1 && movi.Id != pokemon.Slot1__c){
-                    pokemon.Slot2__c = movi.Id;
+                if (count == 1 && numMovi.get(0) != numero){
+                    numMovi.add(numero);
                     count++;
                 }
-                if (count == 2 && movi.Id != pokemon.Slot1__c && movi.Id != pokemon.Slot2__c){
-                    pokemon.Slot3__c = movi.Id;
+                if (count == 2 && numMovi.get(0) != numero && numMovi.get(1) != numero){
+                    numMovi.add(numero);
                     count++;
                 }
-                if (count == 3 && movi.Id != pokemon.Slot1__c && movi.Id != pokemon.Slot2__c && movi.Id != pokemon.Slot3__c){
-                    pokemon.Slot4__c = movi.Id;
+                if (count == 3 && numMovi.get(0) != numero && numMovi.get(1) != numero && numMovi.get(2) != numero){
+                    numMovi.add(numero);
                     count++;
                 }
             }
+            if (moves.size() > 0){
+                Map<String,Object> moves0 = (Map<String,Object>) moves.get(numMovi.get(0));
+                Map<String,Object> move0 = (Map<String, Object>) moves0.get('move');
+                String movename0 = (String) move0.get('name');
+                Movimiento__c movi0 = [SELECT Id 
+                                      FROM Movimiento__c 
+                                      WHERE Name = :movename0.capitalize()
+                                      LIMIT 1];
+                pokemon.Slot1__c = movi0.id;
+            }
+            if (moves.size() > 1){
+                Map<String,Object> moves1 = (Map<String,Object>) moves.get(numMovi.get(1));
+                Map<String,Object> move1 = (Map<String, Object>) moves1.get('move');
+                String movename1 = (String) move1.get('name');
+                Movimiento__c movi1 = [SELECT Id 
+                                      FROM Movimiento__c 
+                                      WHERE Name = :movename1.capitalize()
+                                      LIMIT 1];
+                pokemon.Slot2__c = movi1.id;
+            }
+            if (moves.size() > 2){
+                Map<String,Object> moves2 = (Map<String,Object>) moves.get(numMovi.get(2));
+                Map<String,Object> move2 = (Map<String, Object>) moves2.get('move');
+                String movename2 = (String) move2.get('name');
+                Movimiento__c movi2 = [SELECT Id 
+                                      FROM Movimiento__c 
+                                      WHERE Name = :movename2.capitalize()
+                                      LIMIT 1];
+                pokemon.Slot3__c = movi2.id;
+            }
+            if (moves.size() > 3){
+                Map<String,Object> moves3 = (Map<String,Object>) moves.get(numMovi.get(3));
+                Map<String,Object> move3 = (Map<String, Object>) moves3.get('move');
+                String movename3 = (String) move3.get('name');
+                Movimiento__c movi3 = [SELECT Id 
+                                      FROM Movimiento__c 
+                                      WHERE Name = :movename3.capitalize()
+                                      LIMIT 1];
+                pokemon.Slot4__c = movi3.id;
+            }
+        
 
             // Se inserta el objeto de tipo Pokemon__c en la base de datos
             insert pokemon;

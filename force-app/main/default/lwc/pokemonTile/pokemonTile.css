@@ -1,0 +1,15 @@
+:host {
+	--slds-c-card-color-background:  rgba(255, 60, 0, 0.918);
+}
+.pokemon-tile {
+	
+	border: 1px solid #000000;
+	border-radius: .25rem;
+	background-color: rgb(211, 60, 0);
+	box-shadow:5px 5px 5px grey;
+}
+.slds-m-left_x-small {
+	background-color:rgb(31, 31, 31);
+	border: 8px solid rgb(153, 153, 153);
+	border-radius: .50rem;
+}
